@@ -25,7 +25,6 @@ public class Application {
     @JoinColumn(name = "event_id")
     private Event event;
 
-    // например: PENDING, APPROVED, REJECTED, CANCELLED
     @Column(nullable = false)
     private String status;
 

@@ -15,6 +15,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // === ОСНОВНЫЕ ДАННЫЕ ===
     private String title;            // название мероприятия
     private String description;      // описание
     private String location;         // место проведения
@@ -22,17 +23,31 @@ public class Event {
 
     private Integer maxParticipants; // лимит участников
 
-    // связь с координатором (пользователь)
+    // === СТАТУС ===
+    @Enumerated(EnumType.STRING)
+    private EventStatus status;      // OPEN, CLOSED, SOON
+
+    // === СВЯЗИ ===
     @ManyToOne
     @JoinColumn(name = "coordinator_id")
     private User coordinator;
 
-    // связь с организацией
     @ManyToOne
     @JoinColumn(name = "organization_id")
     private Organization organization;
 
-    // заявки на участие
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<Application> applications;
+
+    // === ВЫЧИСЛЯЕМЫЕ ПОЛЯ (для HTML) ===
+
+    @Transient
+    public int getParticipantsCount() {
+        return applications == null ? 0 : applications.size();
+    }
+
+    @Transient
+    public String getName() {
+        return title;
+    }
 }

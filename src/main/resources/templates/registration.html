@@ -5,9 +5,16 @@
     <title>Регистрация</title>
 </head>
 <body>
+
 <h2>Регистрация</h2>
 
-<form action="/registration" method="post">
+<!-- 🔴 сообщение об ошибке -->
+<div th:if="${error}"
+     style="border: 1px solid red; padding: 10px; margin-bottom: 15px;">
+    <p th:text="${error}"></p>
+</div>
+
+<form th:action="@{/registration}" method="post">
     <label>Логин:</label><br>
     <input type="text" name="username" required><br><br>
 

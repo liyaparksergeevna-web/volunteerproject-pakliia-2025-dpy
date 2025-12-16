@@ -1,16 +1,58 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
-    <title>Список мероприятий</title>
+    <meta charset="UTF-8">
+    <title>Мероприятия</title>
 </head>
 <body>
-<h1>Мероприятия</h1>
 
-<p th:if="${events == null}">Переменная events отсутствует</p>
+<h2>Мероприятия</h2>
 
-<ul th:if="${events != null}" th:each="event : ${events}">
-    <li th:text="${event.title}">Название</li>
-</ul>
+<!-- если список пуст -->
+<p th:if="${#lists.isEmpty(events)}">
+    Мероприятия отсутствуют
+</p>
+
+<table border="1" cellpadding="8" th:if="${!#lists.isEmpty(events)}">
+    <thead>
+    <tr>
+        <th>Название мероприятия</th>
+        <th>Количество участников</th>
+        <th>Статус</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="event : ${events}">
+        <td th:text="${event.name}"></td>
+        <td th:text="${event.participantsCount}"></td>
+
+        <td>
+            <!-- Подать заявку -->
+            <span th:if="${event.status == 'OPEN'}">
+                <a href="#">Подать заявку</a>
+            </span>
+
+            <!-- Приём закрыт -->
+            <span th:if="${event.status == 'CLOSED'}">
+                Приём закрыт
+            </span>
+
+            <!-- Скоро -->
+            <span th:if="${event.status == 'SOON'}">
+                Скоро
+            </span>
+
+            <!-- если статус неизвестен -->
+            <span th:if="${event.status != 'OPEN'
+                          and event.status != 'CLOSED'
+                          and event.status != 'SOON'}">
+                Неизвестный статус
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>

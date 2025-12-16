@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,7 +30,8 @@ public class AuthController {
     @PostMapping("/registration")
     public String register(@RequestParam String username,
                            @RequestParam String password,
-                           Model model) {
+                           Model model,
+                           RedirectAttributes redirectAttributes) {
 
         if (userRepository.findByUsername(username).isPresent()) {
             model.addAttribute("error", "Логин уже существует");
@@ -45,6 +47,12 @@ public class AuthController {
         user.getRoles().add(roleUser);
 
         userRepository.save(user);
+
+        // 🔹 ВАЖНОЕ ДОБАВЛЕНИЕ
+        redirectAttributes.addFlashAttribute(
+                "successMessage",
+                "Регистрация прошла успешно. Пожалуйста, войдите в систему."
+        );
 
         return "redirect:/login";
     }
