@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <title>Волонтёрская организация</title>
@@ -15,14 +16,20 @@
 
         <!-- пользователь НЕ авторизован -->
         <span sec:authorize="isAnonymous()">
-            <a href="/login">Вход</a> |
-            <a href="/registration">Регистрация</a>
-        </span>
-            <!-- пользователь авторизован -->
+        <a href="/login">Вход</a> |
+        <a href="/registration">Регистрация</a> |
+
+    </span>
+
+        <!-- пользователь авторизован -->
         <span sec:authorize="isAuthenticated()">
-            <a href="/profile">Личный кабинет</a>
-            <a href="/events">Мероприятия</a>
-        </span>
+        <a href="/profile">Личный кабинет</a> |
+        <a href="/events">Мероприятия</a> |
+
+        <form th:action="@{/logout}" method="post" style="display:inline;">
+            <button type="submit" class="nav-link-button">Выйти</button>
+        </form>
+    </span>
     </nav>
 </header>
 

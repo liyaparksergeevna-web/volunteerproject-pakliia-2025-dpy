@@ -1,0 +1,13 @@
+.nav-link-button {
+    background: none;
+    border: none;
+    color: purple;
+    text-decoration: underline;
+    font: inherit;
+    cursor: pointer;
+    padding: 0;
+}
+
+.nav-link-button:hover {
+    color: #551A8B;
+}
