@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список заявок</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f6f6f6;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #f1f1f1;
+        }
+
+        tr:hover {
+            background: #fafafa;
+        }
+
+        .empty {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Заявки</h1>
+
+<!-- Если список пуст -->
+<div th:if="${applications.isEmpty()}" class="empty">
+    Заявок пока нет.
+</div>
+
+<!-- Если заявки есть -->
+<table th:if="${!applications.isEmpty()}">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Имя волонтёра</th>
+        <th>Заявка</th>
+        <th>Дата отправки</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="app : ${applications}">
+        <td th:text="${app.id}"></td>
+        <td th:text="${app.volunteerName}"></td>
+        <td th:text="${app.description}"></td>
+        <td th:text="${app.createdAt}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

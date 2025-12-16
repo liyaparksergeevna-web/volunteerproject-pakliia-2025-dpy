@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Список мероприятий</title>
+</head>
+<body>
+<h1>Мероприятия</h1>
+
+<p th:if="${events == null}">Переменная events отсутствует</p>
+
+<ul th:if="${events != null}" th:each="event : ${events}">
+    <li th:text="${event.title}">Название</li>
+</ul>
+
+</body>
+</html>

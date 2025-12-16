@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+</head>
+<body>
+
+<h2>Личный кабинет</h2>
+<p>Здравствуйте, <span th:text="${username}"></span>!</p>
+
+<a href="/logout">Выйти</a>
+<a href="/" class="btn btn-outline-success mt-3">Вернуться на главную</a>
+
+</body>
+</html>
